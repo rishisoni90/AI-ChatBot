@@ -31,7 +31,7 @@ def call_llm(messages):
     # Step 6: call Groq
     client = Groq(api_key=api_key)
     response = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
         messages=clean
     )
     return response.choices[0].message.content
