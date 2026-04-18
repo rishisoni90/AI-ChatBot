@@ -2,22 +2,32 @@ import streamlit as st
 from groq import Groq
 
 def call_llm(messages):
-    # Keep system messages but ensure at least one user message exists
-    filtered = []
-    for m in messages:
-        if m["role"] == "system":
-            # Convert system to user message for Groq compatibility
-            filtered.append({"role": "user", "content": m["content"]})
-        elif m["role"] in ["user", "assistant"]:
-            filtered.append(m)
+    # Only keep user and assistant messages
+    filtered = [m for m in messages if m["role"] in ["user", "assistant"]]
 
-    # Safety check - must have at least one message
+    # Must have at least one message
     if not filtered:
         filtered = [{"role": "user", "content": "Hello"}]
 
-    client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+    # Remove consecutive duplicate roles
+    clean = []
+    for m in filtered:
+        if clean and clean[-1]["role"] == m["role"]:
+            continue
+        clean.append(m)
+
+    # Must start with user
+    if clean[0]["role"] != "user":
+        clean.insert(0, {"role": "user", "content": "Hello"})
+
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except Exception:
+        return "❌ ERROR: GROQ_API_KEY not found in Streamlit secrets. Please add it in Settings → Secrets."
+
+    client = Groq(api_key=api_key)
     response = client.chat.completions.create(
         model="llama3-8b-8192",
-        messages=filtered
+        messages=clean
     )
     return response.choices[0].message.content

@@ -10,14 +10,7 @@ class Agent:
         # store user input
         self.memory.add("user", user_input)
 
-        # STEP 1: simple decision logic (only user role - no system)
-        decision = call_llm([
-            {"role": "user", "content": f"Decide if this needs a tool or direct answer: {user_input}"}
-        ])
-
-        decision = decision.lower()
-
-        # STEP 2: TOOL usage
+        # STEP 1: TOOL usage (check keywords first, no LLM needed)
         if "calculate" in user_input.lower():
             result = calculator(user_input.replace("calculate", "").strip())
             return f"🧮 Result: {result}"
@@ -26,7 +19,7 @@ class Agent:
             result = search_places("beach")
             return f"📍 Places: {result}"
 
-        # STEP 3: NORMAL LLM response
+        # STEP 2: NORMAL LLM response
         response = call_llm(self.memory.get())
 
         self.memory.add("assistant", response)

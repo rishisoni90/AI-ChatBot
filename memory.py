@@ -1,9 +1,8 @@
 class Memory:
     def __init__(self):
-        # Use user role instead of system to avoid Groq compatibility issues
         self.messages = [
-            {"role": "user", "content": "You are a helpful AI assistant. Remember this for our conversation."},
-            {"role": "assistant", "content": "Understood! I am a helpful AI assistant. How can I help you today?"}
+            {"role": "user", "content": "You are a helpful AI assistant."},
+            {"role": "assistant", "content": "I am a helpful AI assistant. How can I help you?"}
         ]
 
     def add(self, role, content):
