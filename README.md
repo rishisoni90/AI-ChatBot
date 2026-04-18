@@ -8,7 +8,7 @@ A fully working AI chatbot agent built with Python, deployed free on Streamlit C
 
 ## 🌐 Live Demo
 
-👉 [Click here to try it]([https://your-app-link.streamlit.app](https://placebo.streamlit.app/))
+👉 [Demo](https://placebo.streamlit.app/)
 
 ---
 
