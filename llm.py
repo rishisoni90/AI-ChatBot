@@ -1,20 +1,9 @@
-import requests
+from groq import Groq
 
 def call_llm(messages):
-    prompt = messages[-1]["content"]
-
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "llama3",
-            "prompt": prompt,
-            "stream": False
-        }
+    client = Groq(api_key="your_groq_api_key_here")  # paste your key
+    response = client.chat.completions.create(
+        model="llama3-8b-8192",
+        messages=messages
     )
-
-    data = response.json()
-
-    if "response" in data:
-        return data["response"]
-    else:
-        return str(data)
+    return response.choices[0].message.content
