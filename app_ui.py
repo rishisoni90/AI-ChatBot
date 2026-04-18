@@ -6,7 +6,7 @@ from agent import Agent
 memory = Memory()
 agent = Agent(memory)
 
-st.title("🐇 Rabbit AI..")
+st.title("🐇 Rabbit...")
 
 user_input = st.text_input("Ask something")
 
