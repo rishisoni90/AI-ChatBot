@@ -6,7 +6,7 @@ from agent import Agent
 memory = Memory()
 agent = Agent(memory)
 
-st.title("🤖 My Agentic AI (Ollama Powered)")
+st.title("🐇 Rabbit AI..")
 
 user_input = st.text_input("Ask something")
 
