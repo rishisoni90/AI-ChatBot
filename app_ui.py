@@ -62,7 +62,7 @@ if "memory" not in st.session_state:
     st.session_state.chat_history = []
 
 # --- Animated Title ---
-st.markdown('<span class="vjna-title">VJNA AI 🐇</span>', unsafe_allow_html=True)
+st.markdown('<span class="vjna-title">Vjna AI 🤖</span>', unsafe_allow_html=True)
 
 # --- Chat History ---
 for user_msg, ai_msg in st.session_state.chat_history:
