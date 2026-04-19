@@ -43,7 +43,7 @@ if "memory" not in st.session_state:
     st.session_state.chat_history = []
 
 # --- Title ---
-st.title("🐇 Rabbit AI")
+st.title(" VJNA AI")
 
 # --- Chat History ---
 for user_msg, ai_msg in st.session_state.chat_history:
@@ -53,7 +53,7 @@ for user_msg, ai_msg in st.session_state.chat_history:
         st.write(ai_msg)
 
 # --- Input ---
-user_input = st.chat_input("Message Rabbit AI...")
+user_input = st.chat_input("Message VJNA AI...")
 
 if user_input:
     # Show user message
