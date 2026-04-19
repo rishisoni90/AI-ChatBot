@@ -1,18 +1,19 @@
 import streamlit as st
-import time
 from memory import Memory
 from agent import Agent
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="Rabbit AI",
+    page_title="VJNA AI",
     page_icon="🐇",
     layout="centered"
 )
 
-# --- Animated dots CSS (Claude-style thinking) ---
+# --- CSS ---
 st.markdown("""
 <style>
+
+/* === THINKING DOTS === */
 @keyframes blink {
     0%, 80%, 100% { opacity: 0; transform: scale(0.8); }
     40% { opacity: 1; transform: scale(1.2); }
@@ -33,6 +34,24 @@ st.markdown("""
 }
 .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
 .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* === ANIMATED TITLE === */
+@keyframes colorShift {
+    0%   { color: #ff6b6b; }
+    16%  { color: #ffa94d; }
+    33%  { color: #ffe066; }
+    50%  { color: #69db7c; }
+    66%  { color: #4dabf7; }
+    83%  { color: #cc5de8; }
+    100% { color: #ff6b6b; }
+}
+.vjna-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    animation: colorShift 3s infinite ease-in-out;
+    display: inline-block;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -42,8 +61,8 @@ if "memory" not in st.session_state:
     st.session_state.agent = Agent(st.session_state.memory)
     st.session_state.chat_history = []
 
-# --- Title ---
-st.title(" VJNA AI")
+# --- Animated Title ---
+st.markdown('<span class="vjna-title">VJNA AI 🐇</span>', unsafe_allow_html=True)
 
 # --- Chat History ---
 for user_msg, ai_msg in st.session_state.chat_history:
@@ -56,11 +75,9 @@ for user_msg, ai_msg in st.session_state.chat_history:
 user_input = st.chat_input("Message VJNA AI...")
 
 if user_input:
-    # Show user message
     with st.chat_message("user"):
         st.write(user_input)
 
-    # Show animated dots while thinking
     with st.chat_message("assistant", avatar="🐇"):
         dot_placeholder = st.empty()
         dot_placeholder.markdown("""
@@ -69,10 +86,8 @@ if user_input:
         </div>
         """, unsafe_allow_html=True)
 
-        # Get response
         response = st.session_state.agent.run(user_input)
 
-        # Replace dots with actual response
         dot_placeholder.empty()
         st.write(response)
 
