@@ -68,7 +68,7 @@ st.markdown('<span class="vjna-title">VJNA AI 🐇</span>', unsafe_allow_html=Tr
 for user_msg, ai_msg in st.session_state.chat_history:
     with st.chat_message("user"):
         st.write(user_msg)
-    with st.chat_message("assistant", avatar="🐇"):
+    with st.chat_message("assistant", avatar="🤖"):
         st.write(ai_msg)
 
 # --- Input ---
@@ -78,7 +78,7 @@ if user_input:
     with st.chat_message("user"):
         st.write(user_input)
 
-    with st.chat_message("assistant", avatar="🐇"):
+    with st.chat_message("assistant", avatar="🤖"):
         dot_placeholder = st.empty()
         dot_placeholder.markdown("""
         <div class="thinking-dots">
