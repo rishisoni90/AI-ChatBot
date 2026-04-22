@@ -4,7 +4,7 @@ from agent import Agent
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="VJNA AI",
+    page_title="AI",
     page_icon="🐇",
     layout="centered"
 )
@@ -62,7 +62,7 @@ if "memory" not in st.session_state:
     st.session_state.chat_history = []
 
 # --- Animated Title ---
-st.markdown('<span class="vjna-title">Vjna AI 🤖</span>', unsafe_allow_html=True)
+st.markdown('<span class="vjna-title"> AI 🤖</span>', unsafe_allow_html=True)
 
 # --- Chat History ---
 for user_msg, ai_msg in st.session_state.chat_history:
@@ -72,7 +72,7 @@ for user_msg, ai_msg in st.session_state.chat_history:
         st.write(ai_msg)
 
 # --- Input ---
-user_input = st.chat_input("Message VJNA AI...")
+user_input = st.chat_input("Message AI...")
 
 if user_input:
     with st.chat_message("user"):
